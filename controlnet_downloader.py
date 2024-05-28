@@ -3,10 +3,10 @@ import urllib.parse
 import ipywidgets as widgets
 from IPython.display import display
 import requests
-import subprocess
+from tqdm.notebook import tqdm  # Import tqdm for progress bars
 
 def download_models(models_data, checkbox_container, target_directory):
-    for checkbox in checkbox_container.children[1:]:
+    for checkbox in tqdm(checkbox_container.children[1:], desc="Downloading Models"):  # Skip "Select All" & add progress bar
         if checkbox.value:
             model_name = checkbox.description
             model_files = models_data["sd15_models"].get(model_name) or models_data["xl_models"].get(model_name)
@@ -18,13 +18,14 @@ def download_models(models_data, checkbox_container, target_directory):
                 filepath = os.path.join(os.path.expanduser(target_directory), filename)
                 
                 if not os.path.isfile(filepath):
-                    print(f"Downloading: {filename}...") # Cleaner download start message
-                    # Suppress wget output and handle errors
-                    try:
-                        subprocess.check_output(['wget', url, '-O', filepath], stderr=subprocess.STDOUT)
-                        print(f"Downloaded: {filename}") # Cleaner download complete message
-                    except subprocess.CalledProcessError as e:
-                        print(f"Error downloading {filename}: {e}")
+                    # Use requests for better download control
+                    with requests.get(url, stream=True) as r:
+                        r.raise_for_status()
+                        total_size = int(r.headers.get('content-length', 0))
+                        with open(filepath, 'wb') as f, tqdm(total=total_size, unit='B', unit_scale=True, unit_divisor=1024, desc=f"Downloading {filename}", leave=False) as pbar:
+                            for chunk in r.iter_content(chunk_size=8192): 
+                                f.write(chunk)
+                                pbar.update(len(chunk))
                 else:
                     print(f"File {filename} already exists. Skipping download.")
 
