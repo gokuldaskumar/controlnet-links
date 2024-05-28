@@ -1,0 +1,119 @@
+{
+  "sd15_models": {
+    "ControlNet++ Canny": [
+      "https://huggingface.co/huchenlei/ControlNet_plus_plus_collection_fp16/resolve/main/controlnet%2B%2B_canny_sd15_fp16.safetensors"
+    ],
+    "ControlNet++ Depth": [
+      "https://huggingface.co/huchenlei/ControlNet_plus_plus_collection_fp16/resolve/main/controlnet%2B%2B_depth_sd15_fp16.safetensors"
+    ],
+    "ControlNet-v1-1 Inpaint": [
+      "https://huggingface.co/ckpt/ControlNet-v1-1/resolve/main/control_v11p_sd15_inpaint_fp16.safetensors",
+      "https://huggingface.co/ckpt/ControlNet-v1-1/raw/main/control_v11p_sd15_inpaint_fp16.yaml"
+    ],
+    "ControlNet++ Lineart": [
+      "https://huggingface.co/huchenlei/ControlNet_plus_plus_collection_fp16/resolve/main/controlnet%2B%2B_lineart_sd15_fp16.safetensors"
+    ],
+    "ControlNet-v1-1 NormalBae": [
+      "https://huggingface.co/ckpt/ControlNet-v1-1/resolve/main/control_v11p_sd15_normalbae_fp16.safetensors",
+      "https://huggingface.co/ckpt/ControlNet-v1-1/raw/main/control_v11p_sd15_normalbae_fp16.yaml"
+    ],
+    "ControlNet-v1-1 Openpose": [
+      "https://huggingface.co/ckpt/ControlNet-v1-1/resolve/main/control_v11p_sd15_openpose_fp16.safetensors",
+      "https://huggingface.co/ckpt/ControlNet-v1-1/raw/main/control_v11p_sd15_openpose_fp16.yaml"
+    ],
+    "ControlNet-v1-1 Tile": [
+      "https://huggingface.co/ckpt/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile_fp16.safetensors",
+      "https://huggingface.co/ckpt/ControlNet-v1-1/raw/main/control_v11f1e_sd15_tile_fp16.yaml"
+    ],
+    "ControlNet-v1-1 ip2p": [
+      "https://huggingface.co/ckpt/ControlNet-v1-1/resolve/main/control_v11e_sd15_ip2p_fp16.safetensors",
+      "https://huggingface.co/ckpt/ControlNet-v1-1/raw/main/control_v11e_sd15_ip2p_fp16.yaml"
+    ],
+    "ControlNet-v1-1 shuffle": [
+      "https://huggingface.co/ckpt/ControlNet-v1-1/resolve/main/control_v11e_sd15_shuffle_fp16.safetensors",
+      "https://huggingface.co/ckpt/ControlNet-v1-1/raw/main/control_v11e_sd15_shuffle_fp16.yaml"
+    ],
+    "ControlNet-v1-1 mlsd": [
+      "https://huggingface.co/ckpt/ControlNet-v1-1/resolve/main/control_v11p_sd15_mlsd_fp16.safetensors",
+      "https://huggingface.co/ckpt/ControlNet-v1-1/raw/main/control_v11p_sd15_mlsd_fp16.yaml"
+    ],
+    "ControlNet-v1-1 scribble": [
+      "https://huggingface.co/ckpt/ControlNet-v1-1/resolve/main/control_v11p_sd15_scribble_fp16.safetensors",
+      "https://huggingface.co/ckpt/ControlNet-v1-1/raw/main/control_v11p_sd15_scribble_fp16.yaml"
+    ],
+    "ControlNet++ segment": [
+      "https://huggingface.co/huchenlei/ControlNet_plus_plus_collection_fp16/resolve/main/controlnet%2B%2B_seg_sd15_fp16.safetensors"
+    ],
+    "ControlNet++ softedge": [
+      "https://huggingface.co/huchenlei/ControlNet_plus_plus_collection_fp16/resolve/main/controlnet%2B%2B_hed_softedge_sd15_fp16.safetensors"
+    ],
+    "ControlNet-v1-1 lineart anime": [
+      "https://huggingface.co/ckpt/ControlNet-v1-1/resolve/main/control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+      "https://huggingface.co/ckpt/ControlNet-v1-1/raw/main/control_v11p_sd15s2_lineart_anime_fp16.yaml"
+    ],
+    "ControlNet-v1-1 depth anything": [
+      "https://huggingface.co/spaces/LiheYoung/Depth-Anything/resolve/main/checkpoints_controlnet/diffusion_pytorch_model.safetensors"
+    ],
+    "IP-Adapter Full Face": [
+      "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors"
+    ],
+    "IP-Adapter Plus Face": [
+      "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus-face_sd15.safetensors"
+    ],
+    "IP-Adapter Plus": [
+      "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors"
+    ],
+    "IP-Adapter": [
+      "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter_sd15.safetensors"
+    ],
+    "ControlNet HandRefiner Inpaint Depth": [
+      "https://huggingface.co/hr16/ControlNet-HandRefiner-pruned/resolve/main/control_sd15_inpaint_depth_hand_fp16.safetensors"
+    ],
+    "IP-Adapter FaceID Plus": [
+      "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plus_sd15.bin"
+    ],
+    "IP-Adapter FaceID Plus V2": [
+      "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sd15.bin"
+    ],
+    "IP-Adapter FaceID Portrait": [
+      "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-portrait_sd15.bin"
+    ]
+  },
+  "xl_models": {
+    "SAI XL Canny": [
+      "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_canny_256lora.safetensors"
+    ],
+    "SAI XL Depth": [
+      "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_depth_256lora.safetensors"
+    ],
+    "Xinsir XL OpenPose": [
+      "https://huggingface.co/xinsir/controlnet-openpose-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors",
+      "https://huggingface.co/xinsir/controlnet-openpose-sdxl-1.0/resolve/main/diffusion_pytorch_model_twins.safetensors"
+    ],
+    "Xinsir XL Canny": [
+      "https://huggingface.co/xinsir/controlnet-canny-sdxl-1.0/resolve/main/diffusion_pytorch_model_V2.safetensors"
+    ],
+    "Xinsir XL Scribble": [
+      "https://huggingface.co/xinsir/controlnet-scribble-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors"
+    ],
+    " XL Tile": [
+      "https://huggingface.co/bdsqlsz/qinglong_controlnet-lllite/resolve/main/bdsqlsz_controlllite_xl_tile_realistic.safetensors"
+    ],
+    "MistoLine": [
+      "https://huggingface.co/TheMistoAI/MistoLine/resolve/main/mistoLine_rank256.safetensors"
+    ],
+    "IP-Adapter Plus SDXL": [
+      "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
+    ],
+    "IP-Adapter Plus Face SDXL": [
+      "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus-face_sdxl_vit-h.safetensors"
+    ],
+    "IP-Adapter FaceID Plus V2 SDXL": [
+      "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl.bin"
+    ],
+    "Instant ID SDXL": [
+      "https://huggingface.co/InstantX/InstantID/resolve/main/ip-adapter.bin",
+      "https://huggingface.co/InstantX/InstantID/resolve/main/ControlNetModel/diffusion_pytorch_model.safetensors"
+    ]
+  }
+}
