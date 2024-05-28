@@ -3,23 +3,28 @@ import urllib.parse
 import ipywidgets as widgets
 from IPython.display import display
 import requests
+import subprocess
 
 def download_models(models_data, checkbox_container, target_directory):
-    for checkbox in checkbox_container.children[1:]:  # Skip the "Select All" checkbox
-        if checkbox.value:  # If the checkbox is checked
+    for checkbox in checkbox_container.children[1:]:
+        if checkbox.value:
             model_name = checkbox.description
             model_files = models_data["sd15_models"].get(model_name) or models_data["xl_models"].get(model_name)
             for url in model_files:
                 if isinstance(url, list):
                     url, filename = url
                 else:
-                    filename = urllib.parse.unquote(url.split('/')[-1])  # Decode the filename
+                    filename = urllib.parse.unquote(url.split('/')[-1])
                 filepath = os.path.join(os.path.expanduser(target_directory), filename)
                 
-                # Check if the file already exists
                 if not os.path.isfile(filepath):
-                    # If the file does not exist, download it with the desired filename
-                    os.system(f"wget {url} -O {filepath}")
+                    print(f"Downloading: {filename}...") # Cleaner download start message
+                    # Suppress wget output and handle errors
+                    try:
+                        subprocess.check_output(['wget', url, '-O', filepath], stderr=subprocess.STDOUT)
+                        print(f"Downloaded: {filename}") # Cleaner download complete message
+                    except subprocess.CalledProcessError as e:
+                        print(f"Error downloading {filename}: {e}")
                 else:
                     print(f"File {filename} already exists. Skipping download.")
 
