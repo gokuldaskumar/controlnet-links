@@ -1,11 +1,28 @@
 import os
 import urllib.parse
 import ipywidgets as widgets
-from IPython.display import display, clear_output
+from IPython.display import display
 import requests
+from tqdm.notebook import tqdm  # To show a progress bar in Jupyter
+
+def download_file(url, filepath):
+    response = requests.get(url, stream=True)
+    total_size = int(response.headers.get('content-length', 0))
+    block_size = 1024  # 1 Kibibyte
+    progress_bar = tqdm(total=total_size, unit='iB', unit_scale=True)
+
+    with open(filepath, 'wb') as file:
+        for data in response.iter_content(block_size):
+            progress_bar.update(len(data))
+            file.write(data)
+    progress_bar.close()
+
+    if total_size != 0 and progress_bar.n != total_size:
+        print("ERROR: Something went wrong while downloading", filepath)
+    else:
+        print(f"Downloaded {filepath}")
 
 def download_models(models_data, checkbox_container, target_directory):
-    clear_output(wait=True)  # Clear the previous output
     for checkbox in checkbox_container.children[1:]:  # Skip the "Select All" checkbox
         if checkbox.value:  # If the checkbox is checked
             model_name = checkbox.description
@@ -20,14 +37,9 @@ def download_models(models_data, checkbox_container, target_directory):
                 # Check if the file already exists
                 if not os.path.isfile(filepath):
                     # If the file does not exist, download it with the desired filename
-                    print(f"Downloading {filename}...")
-                    os.system(f"wget {url} -O {filepath}")
-                    print(f"Download of {filename} completed.")
+                    download_file(url, filepath)
                 else:
                     print(f"File {filename} already exists. Skipping download.")
-    print("All downloads completed.")
-
-# Rest of the code remains the same
 
 def main():
     # Fetch the JSON file from the GitHub repository
@@ -92,3 +104,16 @@ def main():
     download_button = widgets.Button(description="Download Selected Models")
     download_button.on_click(download_models_callback)
     display(download_button)
+
+# Execute the code
+url = 'https://raw.githubusercontent.com/gokuldaskumar/controlnet-links/main/controlnet_downloader.py'
+response = requests.get(url)
+
+if response.status_code == 200:
+    code = response.text
+    exec(code, globals())
+    
+    # Call the main function after executing the code
+    main()
+else:
+    print(f"Failed to download the code from {url}")
