@@ -3,29 +3,25 @@ import urllib.parse
 import ipywidgets as widgets
 from IPython.display import display
 import requests
-from tqdm.notebook import tqdm  # Import tqdm for progress bars
+from tqdm.notebook import tqdm
 
 def download_models(models_data, checkbox_container, target_directory):
-    for checkbox in tqdm(checkbox_container.children[1:], desc="Downloading Models"):  # Skip "Select All" & add progress bar
-        if checkbox.value:
+    for checkbox in checkbox_container.children[1:]:  # Skip the "Select All" checkbox
+        if checkbox.value:  # If the checkbox is checked
             model_name = checkbox.description
             model_files = models_data["sd15_models"].get(model_name) or models_data["xl_models"].get(model_name)
             for url in model_files:
                 if isinstance(url, list):
                     url, filename = url
                 else:
-                    filename = urllib.parse.unquote(url.split('/')[-1])
+                    filename = urllib.parse.unquote(url.split('/')[-1])  # Decode the filename
                 filepath = os.path.join(os.path.expanduser(target_directory), filename)
                 
+                # Check if the file already exists
                 if not os.path.isfile(filepath):
-                    # Use requests for better download control
-                    with requests.get(url, stream=True) as r:
-                        r.raise_for_status()
-                        total_size = int(r.headers.get('content-length', 0))
-                        with open(filepath, 'wb') as f, tqdm(total=total_size, unit='B', unit_scale=True, unit_divisor=1024, desc=f"Downloading {filename}", leave=False) as pbar:
-                            for chunk in r.iter_content(chunk_size=8192): 
-                                f.write(chunk)
-                                pbar.update(len(chunk))
+                    # If the file does not exist, download it with the desired filename
+                    with tqdm(unit='B', unit_scale=True, unit_divisor=1024, miniters=1, desc=filename) as progress_bar:
+                        urllib.request.urlretrieve(url, filepath, reporthook=lambda blocknum, blocksize, totalsize: progress_bar.update(blocksize))
                 else:
                     print(f"File {filename} already exists. Skipping download.")
 
