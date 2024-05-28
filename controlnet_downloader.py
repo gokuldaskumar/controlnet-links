@@ -1,11 +1,11 @@
 import os
 import urllib.parse
 import ipywidgets as widgets
-from IPython.display import display
+from IPython.display import display, clear_output
 import requests
-from tqdm.notebook import tqdm
 
 def download_models(models_data, checkbox_container, target_directory):
+    clear_output(wait=True)  # Clear the previous output
     for checkbox in checkbox_container.children[1:]:  # Skip the "Select All" checkbox
         if checkbox.value:  # If the checkbox is checked
             model_name = checkbox.description
@@ -20,10 +20,14 @@ def download_models(models_data, checkbox_container, target_directory):
                 # Check if the file already exists
                 if not os.path.isfile(filepath):
                     # If the file does not exist, download it with the desired filename
-                    with tqdm(unit='B', unit_scale=True, unit_divisor=1024, miniters=1, desc=filename) as progress_bar:
-                        urllib.request.urlretrieve(url, filepath, reporthook=lambda blocknum, blocksize, totalsize: progress_bar.update(blocksize))
+                    print(f"Downloading {filename}...")
+                    os.system(f"wget {url} -O {filepath}")
+                    print(f"Download of {filename} completed.")
                 else:
                     print(f"File {filename} already exists. Skipping download.")
+    print("All downloads completed.")
+
+# Rest of the code remains the same
 
 def main():
     # Fetch the JSON file from the GitHub repository
