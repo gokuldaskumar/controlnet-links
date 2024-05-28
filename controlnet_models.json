@@ -52,7 +52,7 @@
       "https://huggingface.co/ckpt/ControlNet-v1-1/raw/main/control_v11p_sd15s2_lineart_anime_fp16.yaml"
     ],
     "ControlNet-v1-1 depth anything": [
-      "https://huggingface.co/spaces/LiheYoung/Depth-Anything/resolve/main/checkpoints_controlnet/diffusion_pytorch_model.safetensors"
+      ["https://huggingface.co/spaces/LiheYoung/Depth-Anything/resolve/main/checkpoints_controlnet/diffusion_pytorch_model.safetensors", "control_sd15_depth_anything.safetensors"]
     ],
     "IP-Adapter Full Face": [
       "https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-full-face_sd15.safetensors"
@@ -87,20 +87,20 @@
       "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/sai_xl_depth_256lora.safetensors"
     ],
     "Xinsir XL OpenPose": [
-      "https://huggingface.co/xinsir/controlnet-openpose-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors",
-      "https://huggingface.co/xinsir/controlnet-openpose-sdxl-1.0/resolve/main/diffusion_pytorch_model_twins.safetensors"
+      ["https://huggingface.co/xinsir/controlnet-openpose-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors", "xinsir_xl_openpose.safetensors"],
+      ["https://huggingface.co/xinsir/controlnet-openpose-sdxl-1.0/resolve/main/diffusion_pytorch_model_twins.safetensors", "xinsir_xl_openpose_twins.safetensors"]
     ],
     "Xinsir XL Canny": [
-      "https://huggingface.co/xinsir/controlnet-canny-sdxl-1.0/resolve/main/diffusion_pytorch_model_V2.safetensors"
+      ["https://huggingface.co/xinsir/controlnet-canny-sdxl-1.0/resolve/main/diffusion_pytorch_model_V2.safetensors", "xinsir_xl_canny.safetensors"]
     ],
     "Xinsir XL Scribble": [
-      "https://huggingface.co/xinsir/controlnet-scribble-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors"
+      ["https://huggingface.co/xinsir/controlnet-scribble-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors", "xinsir_xl_scribble.safetensors"]
     ],
-    " XL Tile": [
+    "XL Tile": [
       "https://huggingface.co/bdsqlsz/qinglong_controlnet-lllite/resolve/main/bdsqlsz_controlllite_xl_tile_realistic.safetensors"
     ],
     "MistoLine": [
-      "https://huggingface.co/TheMistoAI/MistoLine/resolve/main/mistoLine_rank256.safetensors"
+      ["https://huggingface.co/TheMistoAI/MistoLine/resolve/main/mistoLine_rank256.safetensors", "mistoLine_softedge_sdxl_fp16.safetensors"]
     ],
     "IP-Adapter Plus SDXL": [
       "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
@@ -112,8 +112,8 @@
       "https://huggingface.co/h94/IP-Adapter-FaceID/resolve/main/ip-adapter-faceid-plusv2_sdxl.bin"
     ],
     "Instant ID SDXL": [
-      "https://huggingface.co/InstantX/InstantID/resolve/main/ip-adapter.bin",
-      "https://huggingface.co/InstantX/InstantID/resolve/main/ControlNetModel/diffusion_pytorch_model.safetensors"
+      ["https://huggingface.co/InstantX/InstantID/resolve/main/ip-adapter.bin", "ip-adapter_instant_id_sdxl.bin"],
+      ["https://huggingface.co/InstantX/InstantID/resolve/main/ControlNetModel/diffusion_pytorch_model.safetensors", "control_instant_id_sdxl.safetensors"]
     ]
   }
 }
