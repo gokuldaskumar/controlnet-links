@@ -86,6 +86,3 @@ def main():
     download_button = widgets.Button(description="Download Selected Models")
     download_button.on_click(download_models_callback)
     display(download_button)
-
-if __name__ == "__main__":
-    main()
