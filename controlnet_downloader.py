@@ -13,14 +13,17 @@ models_data = response.json()
 
 sd15_models = models_data["sd15_models"]
 xl_models = models_data["xl_models"]
+ic_light_models = models_data["ic_light_models"]
 
 # Create checkboxes for each model
 sd15_checkboxes = [widgets.Checkbox(value=False, description=key) for key in sd15_models.keys()]
 xl_checkboxes = [widgets.Checkbox(value=False, description=key) for key in xl_models.keys()]
+ic_light_checkboxes = [widgets.Checkbox(value=False, description=key) for key in ic_light_models.keys()]
 
 # "Select All" checkboxes
 select_all_sd15 = widgets.Checkbox(description="Select All SD15", value=False)
 select_all_xl = widgets.Checkbox(description="Select All XL", value=False)
+select_all_ic_light = widgets.Checkbox(description="Select All IC Light", value=False)
 
 # Function to update the selection state of all checkboxes based on "Select All" state
 def update_selection(checkboxes, select_all_checkbox):
@@ -35,6 +38,7 @@ def attach_select_all(select_all_checkbox, checkboxes):
 
 attach_select_all(select_all_sd15, sd15_checkboxes)
 attach_select_all(select_all_xl, xl_checkboxes)
+attach_select_all(select_all_ic_light, ic_light_checkboxes)
 
 # Function to display checkboxes for selected model type
 checkbox_container = widgets.VBox(children=[])
@@ -43,17 +47,21 @@ def display_checkboxes(model_type):
         checkbox_container.children = [select_all_sd15] + sd15_checkboxes
     elif model_type == 'xl':
         checkbox_container.children = [select_all_xl] + xl_checkboxes
+    elif model_type == 'ic_light':
+        checkbox_container.children = [select_all_ic_light] + ic_light_checkboxes
 
 # Create buttons for selecting model type
 sd15_button = widgets.Button(description="SD15 Models")
 xl_button = widgets.Button(description="XL Models")
+ic_light_button = widgets.Button(description="IC Light Models")
 
 # Button click events
 sd15_button.on_click(lambda b: display_checkboxes('sd15'))
 xl_button.on_click(lambda b: display_checkboxes('xl'))
+ic_light_button.on_click(lambda b: display_checkboxes('ic_light'))
 
 # Display buttons
-buttons_container = widgets.HBox(children=[sd15_button, xl_button])
+buttons_container = widgets.HBox(children=[sd15_button, xl_button, ic_light_button])
 display(buttons_container)
 
 # Initially empty container for checkboxes
@@ -80,6 +88,8 @@ def download_file(url, filepath):
 def download_models(b):
     primary_directory = os.path.expanduser("~/stable-diffusion-webui-forge/models/ControlNet")
     secondary_directory = os.path.expanduser("~/stable-diffusion-webui/extensions/sd-webui-controlnet/models")
+    unet_primary_directory = os.path.expanduser("~/stable-diffusion-webui-forge/models/unet")
+    unet_secondary_directory = os.path.expanduser("~/stable-diffusion-webui/models/unet")
 
     # Check for primary directory first
     if os.path.isdir(primary_directory):
@@ -87,27 +97,34 @@ def download_models(b):
     else:
         target_directory = secondary_directory
 
+    # Check for primary unet directory first
+    if os.path.isdir(unet_primary_directory):
+        unet_target_directory = unet_primary_directory
+    else:
+        unet_target_directory = unet_secondary_directory
+
     os.makedirs(target_directory, exist_ok=True)
+    os.makedirs(unet_target_directory, exist_ok=True)
     downloaded_files = []
 
     for checkbox in checkbox_container.children[1:]:  # Skip the "Select All" checkbox
         if checkbox.value:  # If the checkbox is checked
             model_name = checkbox.description
-            model_files = sd15_models.get(model_name) or xl_models.get(model_name)
+            model_files = sd15_models.get(model_name) or xl_models.get(model_name) or ic_light_models.get(model_name)
             for url in model_files:
                 if isinstance(url, list):
                     url, filename = url
                 else:
                     filename = urllib.parse.unquote(url.split('/')[-1])  # Decode the filename
-                filepath = os.path.join(target_directory, filename)
+                filepath = os.path.join(target_directory if model_name not in ic_light_models else unet_target_directory, filename)
                 
                 # Check if the file already exists
                 if not os.path.isfile(filepath):
-                    print(f"Downloading {filename} into {target_directory}...")
+                    print(f"Downloading {filename} into {target_directory if model_name not in ic_light_models else unet_target_directory}...")
                     download_file(url, filepath)
                     downloaded_files.append(filename)
                 else:
-                    print(f"File {filename} already exists in {target_directory}. Skipping download.")
+                    print(f"File {filename} already exists in {target_directory if model_name not in ic_light_models else unet_target_directory}. Skipping download.")
 
     if downloaded_files:
         print(f"\nDownload Complete. Models downloaded: {', '.join(downloaded_files)}")
