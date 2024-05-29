@@ -1,8 +1,10 @@
+# controlnet_models_downloader.py
 import os
 import urllib.parse
 import ipywidgets as widgets
 from IPython.display import display
 import requests
+from tqdm import tqdm
 
 # Fetch the JSON file from the GitHub repository
 json_url = "https://raw.githubusercontent.com/gokuldaskumar/controlnet-links/main/controlnet_models.json"
@@ -57,9 +59,29 @@ display(buttons_container)
 # Initially empty container for checkboxes
 display(checkbox_container)
 
+# Function to download a file with progress bar
+def download_file(url, filepath):
+    response = requests.get(url, stream=True)
+    total_size = int(response.headers.get('content-length', 0))
+    chunk_size = 8192
+    with open(filepath, 'wb') as f, tqdm(
+        total=total_size,
+        unit='B',
+        unit_scale=True,
+        desc=os.path.basename(filepath),
+        initial=0,
+        miniters=1
+    ) as pbar:
+        for chunk in response.iter_content(chunk_size=chunk_size):
+            f.write(chunk)
+            pbar.update(len(chunk))
+
 # Function to download selected models
 def download_models(b):
-    target_directory = "~/stable-diffusion-webui/extensions/sd-webui-controlnet/models"
+    target_directory = os.path.expanduser("~/stable-diffusion-webui/extensions/sd-webui-controlnet/models")
+    os.makedirs(target_directory, exist_ok=True)
+    downloaded_files = []
+
     for checkbox in checkbox_container.children[1:]:  # Skip the "Select All" checkbox
         if checkbox.value:  # If the checkbox is checked
             model_name = checkbox.description
@@ -69,14 +91,20 @@ def download_models(b):
                     url, filename = url
                 else:
                     filename = urllib.parse.unquote(url.split('/')[-1])  # Decode the filename
-                filepath = os.path.join(os.path.expanduser(target_directory), filename)
-
+                filepath = os.path.join(target_directory, filename)
+                
                 # Check if the file already exists
                 if not os.path.isfile(filepath):
-                    # If the file does not exist, download it with the desired filename
-                    !wget {url} -O {filepath}
+                    print(f"Downloading {filename}...")
+                    download_file(url, filepath)
+                    downloaded_files.append(filename)
                 else:
                     print(f"File {filename} already exists. Skipping download.")
+
+    if downloaded_files:
+        print(f"\nDownload Complete. Models downloaded: {', '.join(downloaded_files)}")
+    else:
+        print("\nNo new models were downloaded.")
 
 # Create a button to start the download
 download_button = widgets.Button(description="Download Selected Models")
