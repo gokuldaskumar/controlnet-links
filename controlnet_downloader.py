@@ -78,7 +78,11 @@ def download_file(url, filepath):
 
 # Function to download selected models
 def download_models(b):
-    target_directory = os.path.expanduser("~/stable-diffusion-webui/extensions/sd-webui-controlnet/models")
+    target_directory = os.path.expanduser("~/stable-diffusion-webui-forge/models/ControlNet")
+    if not os.path.isdir(target_directory):
+        print(f"Directory '{target_directory}' not found. Please ensure the path exists.")
+        return
+
     os.makedirs(target_directory, exist_ok=True)
     downloaded_files = []
 
