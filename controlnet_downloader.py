@@ -18,7 +18,7 @@ def download_file(url, filepath):
     progress_bar.close()
 
     if total_size != 0 and progress_bar.n != total_size:
-        print("ERROR: Something went wrong while downloading", filepath)
+        print(f"ERROR: Something went wrong while downloading {filepath}")
     else:
         print(f"Downloaded {filepath}")
 
