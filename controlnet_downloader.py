@@ -88,8 +88,8 @@ def download_file(url, filepath):
 def download_models(b):
     primary_directory = os.path.expanduser("~/stable-diffusion-webui-forge/models/ControlNet")
     secondary_directory = os.path.expanduser("~/stable-diffusion-webui/extensions/sd-webui-controlnet/models")
-    unet_primary_directory = os.path.expanduser("~/stable-diffusion-webui-forge/models/unet")
-    unet_secondary_directory = os.path.expanduser("~/stable-diffusion-webui/models/unet")
+    unet_primary_directory = os.path.expanduser("~/stable-diffusion-webui-forge/models/ic-light")
+    unet_secondary_directory = os.path.expanduser("~/stable-diffusion-webui/models/ic-light")
 
     # Check for primary directory first
     if os.path.isdir(primary_directory):
